@@ -8,7 +8,20 @@ const input =
       .map(x => parseInt(x))
 
 
-const solve = (inp:number[]): number => {
+const solvePart1 = (inp:number[]): number => {
+  
+  for(let i = 0; i < inp.length; i++) {
+    for(let j = 0; j < inp.length; j++) {
+      if(i != j && inp[i] + inp[j] == 2020) {
+        return inp[i] * inp[j]
+      }
+    }
+  }
+
+  return 0
+}
+
+const solvePart2 = (inp:number[]): number => {
   
   for(let i = 0; i < inp.length; i++) {
     for(let j = 0; j < inp.length; j++) {
@@ -23,4 +36,5 @@ const solve = (inp:number[]): number => {
   return 0
 }
 
-console.log(solve(input))
+console.log(`Solution part 1: ${solvePart1(input)}`)
+console.log(`Solution part 2: ${solvePart2(input)}`)
