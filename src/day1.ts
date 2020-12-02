@@ -1,6 +1,4 @@
 import * as fs from 'fs';
-import * as path from 'path';
-
 
 const input = 
     fs
