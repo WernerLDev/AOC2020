@@ -28,13 +28,15 @@ const solvePart1 = (): number => {
 };
 
 const solvePart2 = (): number => {
-  const slope1 = solve({ row: 0, col: 0 }, 1, 1, 0);
-  const slope2 = solve({ row: 0, col: 0 }, 3, 1, 0);
-  const slope3 = solve({ row: 0, col: 0 }, 5, 1, 0);
-  const slope4 = solve({ row: 0, col: 0 }, 7, 1, 0);
-  const slope5 = solve({ row: 0, col: 0 }, 1, 2, 0);
-
-  return slope1 * slope2 * slope3 * slope4 * slope5;
+  return [
+    [1, 1],
+    [3, 1],
+    [5, 1],
+    [7, 1],
+    [1, 2],
+  ]
+    .map((x) => solve({ row: 0, col: 0 }, x[0], x[1], 0))
+    .reduce((a, b) => a * b);
 };
 
 console.log(`Solution part 1: ${solvePart1()}`);
