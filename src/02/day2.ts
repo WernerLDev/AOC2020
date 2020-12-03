@@ -15,7 +15,7 @@ const input = fs
 const solvePart1 = (lines: string[][]) => {
   return lines.filter((line) => {
     const [min, max, char, passwd] = line;
-    let n = [...passwd].filter((x) => x == char).length;
+    const n = [...passwd].filter((x) => x == char).length;
     return n >= parseInt(min) && n <= parseInt(max);
   }).length;
 };
