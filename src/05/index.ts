@@ -15,10 +15,15 @@ const processLine = (line: string) => {
   return solve(0, 0, 1023);
 };
 
+const ProcessSmarter = (line: string) =>
+  [...line].reduce<number>((number, nextVal) => {
+    return (number << 1) + (nextVal == "B" || nextVal == "R" ? 1 : 0);
+  }, 0);
+
 const input = fs
   .readFileSync("inputs/day5.txt", "utf-8")
   .split("\n")
-  .map((line) => processLine(line))
+  .map((line) => ProcessSmarter(line))
   .sort((a, b) => b - a);
 
 const solvePart1 = () => {
