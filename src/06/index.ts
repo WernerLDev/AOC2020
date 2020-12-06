@@ -3,13 +3,7 @@ import * as fs from "fs";
 const input = fs.readFileSync("inputs/day6.txt", "utf-8").split("\n\n");
 
 const uniqueAnswers = (group: string) => {
-  const answers = new Set<string>();
-
-  [...group.replace(/\n/g, "")].forEach((c) => {
-    if (!answers.has(c)) answers.add(c);
-  });
-
-  return answers;
+  return new Set<string>([...group]);
 };
 
 const solvePart1 = () => {
