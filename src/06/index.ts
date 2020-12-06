@@ -13,13 +13,12 @@ const solvePart1 = () => {
 const solvePart2 = () => {
   return input
     .map((line) => {
-      const persons = line.split("\n").map((p) => new Set([...p]));
-      return [...uniqueAnswers(line)].filter((answer) => {
-        return (
-          persons.filter((person) => person.has(answer)).length ==
-          persons.length
-        );
-      }).length;
+      return line
+        .split("\n")
+        .map((x) => new Set([...x]))
+        .reduce((a, b) => {
+          return new Set([...a].filter((key) => b.has(key)));
+        }).size;
     })
     .reduce((a, b) => a + b);
 };
