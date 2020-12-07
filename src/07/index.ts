@@ -8,18 +8,13 @@ type Bag = {
   }[];
 };
 
-const getBagName = (fullName: string) => {
-  const parts = fullName.split(" ");
-  return `${parts[0]} ${parts[1]}`;
-};
-
 const input = fs
   .readFileSync("inputs/day7.txt", "utf-8")
   .split("\n")
   .map((line) => {
-    const [name, contain] = line.split(" contain ");
+    const [name, contain] = line.split(" bags contain ");
     return <Bag>{
-      name: getBagName(name),
+      name: name,
       contains: contain.split(", ").map((b) => {
         const parts = b.match(/^([\d]+) ([a-z]+) ([a-z]+) ([a-z\.]+)$/);
         if (parts == null) return null;
