@@ -63,13 +63,12 @@ const solvePart2 = () => {
   const swap = (instr: "jmp" | "nop") => (instr == "jmp" ? "nop" : "jmp");
 
   for (let index: number = 0; index < input.length; index++) {
-    const program = [...input];
-    const instr = program[index];
+    const instr = input[index];
 
     if (instr.operation == "jmp" || instr.operation == "nop") {
-      program[index].operation = swap(instr.operation);
-      const result = executeProgram(program, 0, 0, new Set());
-      program[index].operation = swap(instr.operation);
+      input[index].operation = swap(instr.operation);
+      const result = executeProgram(input, 0, 0, new Set());
+      input[index].operation = swap(instr.operation);
 
       if (result.terminates) return result.acc;
     }
