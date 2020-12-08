@@ -27,10 +27,10 @@ const executeProgram = (
   acc: number,
   history: Set<number>
 ): ProgramResult => {
-  if (history.has(index)) return { terminates: false, acc };
-
   const newHistory = new Set<number>([...history, index]);
   const instruction = program[index];
+
+  if (history.has(index)) return { terminates: false, acc };
   if (!instruction) return { terminates: true, acc };
 
   switch (instruction.operation) {
@@ -60,14 +60,17 @@ const solvePart1 = (): number => {
 };
 
 const solvePart2 = () => {
+  const swap = (instr: "jmp" | "nop") => (instr == "jmp" ? "nop" : "jmp");
+
   for (let index: number = 0; index < input.length; index++) {
     const program = [...input];
     const instr = program[index];
 
     if (instr.operation == "jmp" || instr.operation == "nop") {
-      program[index].operation = instr.operation == "jmp" ? "nop" : "jmp";
+      program[index].operation = swap(instr.operation);
       const result = executeProgram(program, 0, 0, new Set());
-      program[index].operation = instr.operation == "jmp" ? "nop" : "jmp";
+      program[index].operation = swap(instr.operation);
+
       if (result.terminates) return result.acc;
     }
   }
@@ -75,5 +78,10 @@ const solvePart2 = () => {
   return 0;
 };
 
+console.time("part1");
 console.log(`Solution part 1: ${solvePart1()}`);
+console.timeEnd("part1");
+
+console.time("part2");
 console.log(`Solution part 2: ${solvePart2()}`);
+console.timeEnd("part2");
